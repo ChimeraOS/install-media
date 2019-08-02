@@ -21,3 +21,9 @@ sed -i 's/#\(HandleLidSwitch=\)suspend/\1ignore/' /etc/systemd/logind.conf
 
 systemctl enable pacman-init.service choose-mirror.service
 systemctl set-default multi-user.target
+
+echo "./install.sh" >> /root/.zshrc
+
+curl -L https://github.com/gamer-os/frzr/releases/download/0.3.0/frzr-0.3.0-1-x86_64.pkg.tar > frzr.pkg.tar
+pacman --noconfirm -U frzr.pkg.tar
+rm frzr.pkg.tar

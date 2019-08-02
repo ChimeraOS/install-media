@@ -1,20 +1,22 @@
 #! /bin/bash
 
-FRZR_VERSION=0.1.0
-FRZR_RELEASE=1
 
-FRZR_PKG=frzr-${FRZR_VERSION}-${FRZR_RELEASE}-x86_64.pkg.tar
+if [ $EUID -ne 0 ]; then
+	echo "$(basename $0) must be run as root"
+	exit 1
+fi
 
-wget "https://github.com/gamer-os/frzr/releases/download/${FRZR_VERSION}/${FRZR_PKG}"
-
-pacman -Sy
-pacman --noconfirm -U ${FRZR_PKG}
-rm ${FRZR_PKG}
-
-if [ -z "$1" ]; then
-	frzr-bootstrap # show error due to missing device parameter
+if ! frzr-bootstrap gamer; then
 	exit
 fi
 
-frzr-bootstrap $1 gamer
-frzr-deploy https://gamer-os.github.io/repo/gameros
+whiptail --msgbox "The system will now be downloaded and installed. This may take some time." 10 50
+
+if ! frzr-deploy https://gamer-os.github.io/gamer-os/repos/default; then
+	echo "Installation failed."
+	exit
+fi
+
+if (whiptail --yesno "Installation complete. Would you like to restart now?" 10 50); then
+	reboot
+fi
