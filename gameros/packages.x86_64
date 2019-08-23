@@ -4,3 +4,4 @@ libnewt
 syslinux
 openssh
 efibootmgr
+dosfstools
