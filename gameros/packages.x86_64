@@ -5,5 +5,4 @@ syslinux
 openssh
 efibootmgr
 dosfstools
-arch-install-scripts
 plymouth
