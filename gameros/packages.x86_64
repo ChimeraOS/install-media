@@ -3,6 +3,4 @@ parted
 libnewt
 syslinux
 openssh
-efibootmgr
-dosfstools
 plymouth
