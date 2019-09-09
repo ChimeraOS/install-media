@@ -3,3 +3,5 @@ parted
 libnewt
 syslinux
 openssh
+dosfstools
+efibootmgr
