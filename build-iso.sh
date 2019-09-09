@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $EUID -ne 0 ]; then
+	echo "$(basename $0) must be run as root"
+	exit 1
+fi
+
 # configuration variables for the iso
 output_dir="output"
 script_dir="gameros"
