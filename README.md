@@ -1,8 +1,8 @@
 # install-media
-Build the gamerOS installation media.
+Build the GamerOS installation media.
 
 ## How to build
-There are two methods of building the installation media for gamerOS. From an Arch based system or from a Docker container.
+There are two methods of building the installation media for GamerOS. From an Arch based system or from a Docker container.
 
 ### Arch based systems
 On Arch the following packages will need to be installed:
@@ -32,7 +32,7 @@ To start building, use the following command:
 Here a short explaination of what which files and directories do.
 
 ### gameros
-Contains the modified archiso profile for gamerOS.
+Contains the modified archiso profile for GamerOS.
 
 ### gameros/pacman.conf
 The pacman configuration during the creation of the installation media. Repositories can be added here.

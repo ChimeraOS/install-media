@@ -1,4 +1,4 @@
-#Dockerfile for building gamerOS
+#Dockerfile for building GamerOS
 #Based on Arch
 
 FROM archlinux/base

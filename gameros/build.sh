@@ -4,8 +4,8 @@ set -e -u
 
 iso_name=gameros
 iso_label="GAMEROS_$(date +%Y%m)"
-iso_publisher="gamerOS <https://github.com/gamer-os/gamer-os>"
-iso_application="gamerOS Installer"
+iso_publisher="GamerOS <https://github.com/gamer-os/gamer-os>"
+iso_application="GamerOS Installer"
 iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 work_dir=work
