@@ -5,3 +5,11 @@ syslinux
 openssh
 dosfstools
 efibootmgr
+dhcpcd
+diffutils
+linux-firmware
+nano
+netctl
+usbutils
+mkinitcpio
+linux
