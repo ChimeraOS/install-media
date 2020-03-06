@@ -6,7 +6,7 @@ if [ $EUID -ne 0 ]; then
 	exit 1
 fi
 
-curl -Is http://www.google.com | head -1 | grep 200 > /dev/null;
+curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null;
 if [ $? -ne 0 ]; then
 	whiptail --msgbox "No internet connection detected. Please connect this computer to the internet with a wired connection before proceeding." 10 50
 fi
