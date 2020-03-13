@@ -24,6 +24,6 @@ systemctl set-default multi-user.target
 
 echo "./install.sh" >> /root/.zshrc
 
-curl -L https://github.com/gamer-os/frzr/releases/download/0.4.11/frzr-0.4.11-1-any.pkg.tar > frzr.pkg.tar
+curl -L https://github.com/gamer-os/frzr/releases/download/0.4.12/frzr-0.4.12-1-any.pkg.tar > frzr.pkg.tar
 pacman --noconfirm -U frzr.pkg.tar
 rm frzr.pkg.tar
