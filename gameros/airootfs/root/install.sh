@@ -6,10 +6,21 @@ if [ $EUID -ne 0 ]; then
 	exit 1
 fi
 
-curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null;
-if [ $? -ne 0 ]; then
-	whiptail --msgbox "No internet connection detected. Please connect this computer to the internet with a wired connection before proceeding." 10 50
-fi
+
+#### Internet connection detection ####
+dhcpcd --background
+
+while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null ); do
+	whiptail --yesno "No internet connection detected. Please connect this computer\
+	 to the internet with a wired connection, wait a few seconds, then retry." 10 50\
+	 --yes-button "Retry"\
+	 --no-button "Exit"
+
+	if [ $? -ne 0 ]; then
+		 exit 1
+	fi
+done
+#######################################
 
 if ! frzr-bootstrap gamer; then
 	exit
