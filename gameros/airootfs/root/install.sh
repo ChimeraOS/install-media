@@ -28,7 +28,7 @@ fi
 
 whiptail --msgbox "The system will now be downloaded and installed. This may take some time." 10 50
 
-if ! frzr-deploy https://gamer-os.github.io/gamer-os/repos/default; then
+if ! frzr-deploy gamer-os/gamer-os:stable; then
 	echo "Installation failed."
 	exit
 fi
