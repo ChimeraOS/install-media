@@ -14,3 +14,4 @@ netctl
 usbutils
 mkinitcpio
 linux
+mkinitcpio-archiso
