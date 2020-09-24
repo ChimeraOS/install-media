@@ -23,6 +23,7 @@ systemctl enable pacman-init.service choose-mirror.service
 systemctl set-default multi-user.target
 
 echo "./install.sh" >> /root/.zshrc
+
 curl -L https://github.com/gamer-os/frzr/releases/download/0.7.0/frzr-0.7.0-1-any.pkg.tar.zst > frzr.pkg.tar.zst
 pacman --noconfirm -U frzr.pkg.tar.zst
 rm frzr.pkg.tar.zst
