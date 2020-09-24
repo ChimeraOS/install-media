@@ -26,8 +26,7 @@ if ! frzr-bootstrap gamer; then
 	exit
 fi
 
-whiptail --msgbox "The system will now be downloaded and installed. This may take some time." 10 50
-
+export SHOW_UI=1
 if ! frzr-deploy gamer-os/gamer-os:stable; then
 	echo "Installation failed."
 	exit
