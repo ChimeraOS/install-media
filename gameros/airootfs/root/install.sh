@@ -10,6 +10,9 @@ fi
 #### Internet connection detection ####
 dhcpcd --background
 
+whiptail --infobox "Checking connection..." 10 50
+sleep 5
+
 while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null ); do
 	whiptail --yesno "No internet connection detected. Please connect this computer\
 	 to the internet with a wired connection, wait a few seconds, then retry." 10 50\
