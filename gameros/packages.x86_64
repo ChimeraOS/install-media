@@ -15,3 +15,5 @@ usbutils
 mkinitcpio
 linux
 mkinitcpio-archiso
+wpa_supplicant
+iwd
