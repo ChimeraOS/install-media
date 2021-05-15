@@ -6,7 +6,6 @@ if [ $EUID -ne 0 ]; then
 	exit 1
 fi
 
-
 #### Internet connection detection ####
 dhcpcd --background
 
@@ -24,6 +23,14 @@ while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null 
 	fi
 done
 #######################################
+
+#### Install frzr
+curl -L https://github.com/gamer-os/frzr/releases/download/0.7.0/frzr-0.7.0-1-any.pkg.tar.zst > frzr.pkg.tar.zst
+pacman --noconfirm -U frzr.pkg.tar.zst
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+rm frzr.pkg.tar.zst
 
 if ! frzr-bootstrap gamer; then
 	exit
