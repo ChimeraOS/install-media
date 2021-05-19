@@ -1,17 +1,30 @@
-jq
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+amd-ucode
+# b43-fwcutter
+base
+# broadcom-wl
 btrfs-progs
-parted
-libnewt
-syslinux
-openssh
-dosfstools
-efibootmgr
 dhcpcd
 diffutils
+dosfstools
+efibootmgr
+intel-ucode
+# ipw2100-fw
+# ipw2200-fw
+jq
+libnewt
+linux
 linux-firmware
+mkinitcpio
+mkinitcpio-archiso
 nano
 netctl
+openssh
+parted
+syslinux
 usbutils
-mkinitcpio
-linux
-mkinitcpio-archiso
+# wpa_supplicant
+wget
+zsh

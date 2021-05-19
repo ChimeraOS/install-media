@@ -5,18 +5,14 @@ if [ $EUID -ne 0 ]; then
 	exit 1
 fi
 
-# configuration variables for the iso
-dockerfile="docker/Dockerfile"
-output_dir="output"
-
 # get the directory of this script
 work_dir="$(realpath $0|rev|cut -d '/' -f2-|rev)"
 
-# create output directory if it doesn't exist yet
-mkdir -p ${work_dir}/${output_dir}
+# configuration variables for the iso
+dockerfile="${work_dir}/docker/Dockerfile"
 
 # build the docker container
-docker build -f ${work_dir}/${dockerfile} -t gameros-builder ${work_dir}
+docker build -f "${dockerfile}" -t gameros-builder ${work_dir}
 
 # make the container build the iso
-exec docker run --privileged --rm -ti -v ${work_dir}/${output_dir}:/root/gameros/out -h gameros-builder gameros-builder ./build.sh -v
+exec docker run --privileged --rm -ti -v ${work_dir}:/root/gameros -h gameros-builder gameros-builder ./build-iso.sh
