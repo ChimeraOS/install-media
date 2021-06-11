@@ -1,7 +1,7 @@
 #Dockerfile for building GamerOS
 #Based on Arch
 
-FROM archlinux/base
+FROM archlinux:base
 MAINTAINER Wouter Wijsman
 
 #Install archiso
