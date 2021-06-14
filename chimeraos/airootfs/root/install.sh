@@ -7,7 +7,7 @@ if [ $EUID -ne 0 ]; then
 fi
 
 #### Test conenction or ask the user for configuration ####
-while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null ); do
+while ! ( curl -Is https://chimeraos.github.io/ | head -1 | grep 200 > /dev/null ); do
     whiptail --yesno "No wired connection detected. Please connect this computer \
      to the internet by configuring a new network." 10 50 \
      --yes-button "Configure" \
@@ -35,7 +35,7 @@ if [ -d "/etc/NetworkManager/system-connections" ]; then
 fi
 
 export SHOW_UI=1
-if ! frzr-deploy gamer-os/gamer-os:stable; then
+if ! frzr-deploy chimeraos/chimeraos:stable; then
     echo "Installation failed."
     exit 1
 fi

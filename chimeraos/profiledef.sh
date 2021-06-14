@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="gameros"
-iso_label="GAMEROS_$(date +%Y%m)"
-iso_publisher="GamerOS <https://github.com/gamer-os/gamer-os>"
-iso_application="GamerOS Installer"
+iso_name="chimeraos"
+iso_label="CHIMERAOS_$(date +%Y%m)"
+iso_publisher="ChimeraOS <https://github.com/ChimeraOS/chimera>"
+iso_application="ChimeraOS Installer"
 iso_version=$(date +%Y.%m.%d)
 install_dir="arch"
 buildmodes=('iso')

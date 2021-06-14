@@ -1,5 +1,6 @@
 temp/
 output/
-gameros/extra_pkg/
-gameros/work/
-gameros/pacman.conf
+chimeraos/extra_pkg/
+chimeraos/work/
+chimeraos/pacman.conf
+temp/
