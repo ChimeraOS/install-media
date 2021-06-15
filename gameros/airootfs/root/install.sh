@@ -28,6 +28,15 @@ if ! frzr-bootstrap gamer; then
     exit 1
 fi
 
+# Post install steps for system configuration
+# Copy over all network configuration from the live session to the system
+MOUNT_PATH=/tmp/frzr_root
+if [ -d "/etc/NetworkManager/system-connections" ]; then
+    mkdir -p -m=700 ${MOUNT_PATH}/etc/NetworkManager/system-connections
+    cp  /etc/NetworkManager/system-connections/* \
+        ${MOUNT_PATH}/etc/NetworkManager/system-connections/.
+fi
+
 export SHOW_UI=1
 if ! frzr-deploy gamer-os/gamer-os:stable; then
     echo "Installation failed."
