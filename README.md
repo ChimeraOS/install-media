@@ -10,6 +10,7 @@ On Arch the following packages will need to be installed:
 - grep
 - file
 - coreutils
+- pikaur
 
 To start building, use the following command:
 
