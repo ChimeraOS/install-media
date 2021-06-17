@@ -20,7 +20,7 @@ while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null 
          exit 1
     fi
 
-    nmtui
+    nmtui-connect
 done
 #######################################
 
