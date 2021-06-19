@@ -6,10 +6,7 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
-#### Wait for conenction or ask the user for configuration ####
-whiptail --infobox "Checking connection..." 10 50
-sleep 5
-
+#### Test conenction or ask the user for configuration ####
 while ! ( curl -Is https://gamer-os.github.io/ | head -1 | grep 200 > /dev/null ); do
     whiptail --yesno "No wired connection detected. Please connect this computer \
      to the internet by configuring a new network." 10 50 \
