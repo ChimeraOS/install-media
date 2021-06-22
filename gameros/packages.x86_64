@@ -2,17 +2,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 amd-ucode
-# b43-fwcutter
+b43-fwcutter
 base
-# broadcom-wl
+broadcom-wl
 btrfs-progs
 dhcpcd
 diffutils
 dosfstools
 efibootmgr
 intel-ucode
-# ipw2100-fw
-# ipw2200-fw
+ipw2100-fw
+ipw2200-fw
 jq
 libnewt
 linux
@@ -25,7 +25,7 @@ openssh
 parted
 syslinux
 usbutils
-# wpa_supplicant
 wget
 zsh
 frzr
+networkmanager
