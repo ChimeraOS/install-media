@@ -1,8 +1,8 @@
 # install-media
-Build the GamerOS installation media.
+Build the ChimeraOS installation media.
 
 ## How to build
-There are two methods of building the installation media for GamerOS. From an Arch based system or from a Docker container.
+There are two methods of building the installation media for ChimeraOS. From an Arch based system or from a Docker container.
 
 ### Arch based systems
 On Arch the following packages will need to be installed:
@@ -33,7 +33,7 @@ To start building, use the following command:
 Here a short explaination of what which files and directories do.
 
 ### chimeraos
-Contains the modified archiso profile for GamerOS.
+Contains the modified archiso profile for ChimeraOS.
 
 ### chimeraos/pacman.conf
 The pacman configuration during the creation of the installation media. Repositories can be added here.
