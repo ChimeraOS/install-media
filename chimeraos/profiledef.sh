@@ -3,7 +3,7 @@
 
 iso_name="chimeraos"
 iso_label="CHIMERAOS_$(date +%Y%m)"
-iso_publisher="ChimeraOS <https://github.com/ChimeraOS/chimera>"
+iso_publisher="ChimeraOS <https://github.com/ChimeraOS>"
 iso_application="ChimeraOS Installer"
 iso_version=$(date +%Y.%m.%d)
 install_dir="arch"
