@@ -1,4 +1,4 @@
-#Dockerfile for building GamerOS
+#Dockerfile for building ChimeraOS install-media
 #Based on Arch
 
 FROM archlinux:base-devel
@@ -18,7 +18,7 @@ RUN echo -e "#!/bin/bash\nif [[ \"$1\" == \"--version\" ]]; then echo 'fake 244 
     chmod +x /usr/bin/systemd-run
 
 #set working dir, you'll have to mount something yourself here
-WORKDIR /root/gameros
+WORKDIR /root/chimeraos
 
 # Build pikaur packages as the 'build' user
 ENV BUILD_USER "build"
@@ -26,4 +26,4 @@ ENV BUILD_USER "build"
 ENV GNUPGHOME  "/etc/pacman.d/gnupg"
 
 #Copy archiso files from this git repo
-ADD gameros /root/gameros
+ADD chimeraos /root/chimeraos

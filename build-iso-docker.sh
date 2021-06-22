@@ -7,7 +7,7 @@ work_dir="$(realpath $0|rev|cut -d '/' -f2-|rev)"
 dockerfile="${work_dir}/docker/Dockerfile"
 
 # build the docker container
-docker build -f "${dockerfile}" -t gameros-builder ${work_dir}
+docker build -f "${dockerfile}" -t chimera-install-builder ${work_dir}
 
 # make the container build the iso
-exec docker run --privileged --rm -ti -v ${work_dir}:/root/gameros -h gameros-builder gameros-builder ./build-iso.sh
+exec docker run --privileged --rm -ti -v ${work_dir}:/root/chimeraos -h chimera-install-builder chimera-install-builder ./build-iso.sh

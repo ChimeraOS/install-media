@@ -10,10 +10,11 @@ work_dir="$(realpath $0|rev|cut -d '/' -f2-|rev)"
 
 # configuration variables for the iso
 output_dir="${work_dir}/output"
-script_dir="${work_dir}/gameros"
+script_dir="${work_dir}/chimeraos"
 temp_dir="${work_dir}/temp"
 
 # create output directory if it doesn't exist yet
+rm -rf "${output_dir}"
 mkdir -p "${output_dir}"
 
 rm -rf "${temp_dir}"
@@ -39,7 +40,7 @@ fi
 cp /tmp/temp_repo/* ${LOCAL_REPO}
 
 # Add the repo to the build
-repo-add ${LOCAL_REPO}/gameros.db.tar.gz ${LOCAL_REPO}/*.pkg.*
+repo-add ${LOCAL_REPO}/chimeraos.db.tar.gz ${LOCAL_REPO}/*.pkg.*
 sed "s|LOCAL_REPO|$LOCAL_REPO|g" $script_dir/pacman.conf.template > $script_dir/pacman.conf
 
 # make the container build the iso
