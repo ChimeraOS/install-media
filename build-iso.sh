@@ -21,7 +21,10 @@ rm -rf "${temp_dir}"
 mkdir -p "${temp_dir}"
 
 # add AUR packages to the build
-AUR_PACKAGES=frzr
+AUR_PACKAGES="\
+    frzr \
+    rtl88x2bu-dkms-git \
+"
 
 # create repo directory if it doesn't exist yet
 LOCAL_REPO="${script_dir}/extra_pkg"
