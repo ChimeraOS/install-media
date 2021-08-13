@@ -48,7 +48,7 @@ repo-add ${LOCAL_REPO}/chimeraos.db.tar.gz ${LOCAL_REPO}/*.pkg.*
 sed "s|LOCAL_REPO|$LOCAL_REPO|g" $script_dir/pacman.conf.template > $script_dir/pacman.conf
 
 # make the container build the iso
-exec mkarchiso -v -w "${temp_dir}" -o "${output_dir}" "${script_dir}"
+mkarchiso -v -w "${temp_dir}" -o "${output_dir}" "${script_dir}"
 
 ISO_FILE_PATH=`ls "${output_dir}/*.iso"`
 ISO_FILE_NAME=`basename "${ISO_FILE_PATH}"`
