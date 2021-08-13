@@ -10,4 +10,4 @@ dockerfile="${work_dir}/docker/Dockerfile"
 docker build -f "${dockerfile}" -t chimera-install-builder ${work_dir}
 
 # make the container build the iso
-exec docker run --privileged --rm -ti -v ${work_dir}:/root/chimeraos -h chimera-install-builder chimera-install-builder ./build-iso.sh
+exec docker run --privileged --rm -v ${work_dir}:/root/chimeraos -h chimera-install-builder chimera-install-builder ./build-iso.sh
