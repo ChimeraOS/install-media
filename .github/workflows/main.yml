@@ -1,0 +1,32 @@
+name: Installer ISO build
+on: push
+jobs:
+  build:
+    name: Installer ISO build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Change directory
+        run: cd $GITHUB_WORKSPACE
+      - name: Build ISO
+        id: build_iso
+        run: ./build-iso-docker.sh
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.build_iso.outputs.version }}_${{ steps.build_iso.outputs.id }}
+          release_name: ${{ steps.build_iso.outputs.version }} (${{ steps.build_iso.outputs.id }})
+          draft: false
+          prerelease: true
+      - name: Upload ISO
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ steps.build_iso.outputs.iso_file_path }}
+          asset_name: ${{ steps.build_iso.outputs.iso_file_name }}
+          asset_content_type: application/x-cd-image
