@@ -47,7 +47,7 @@ INTEL_BUSID=$(lspci -nm -d 8086: | \
     sed 's/\./:/' )
 
 if [[ $INTEL_BUSID == ??:??:? && $NVIDIA_BUSID == ??:??:? ]] ; then
-    if (whiptail --yesno "Intel/Nvidia hybrid setup is detected. Would you like to use this configuration?"); then
+    if (whiptail --yesno "Intel/Nvidia hybrid graphics detected. Would you like to force use of Nvidia graphics?"); then
         echo "
 Section \"ServerLayout\"
     Identifier \"layout\"
