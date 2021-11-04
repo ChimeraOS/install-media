@@ -28,10 +28,11 @@ fi
 #### Post install steps for system configuration
 # Copy over all network configuration from the live session to the system
 MOUNT_PATH=/tmp/frzr_root
-if [ -d "/etc/NetworkManager/system-connections" ]; then
-    mkdir -p -m=700 ${MOUNT_PATH}/etc/NetworkManager/system-connections
-    cp  /etc/NetworkManager/system-connections/* \
-        ${MOUNT_PATH}/etc/NetworkManager/system-connections/.
+SYS_CONN_DIR="/etc/NetworkManager/system-connections"
+if [ -d $SYS_CONN_DIR && "$(ls -A $SYS_CONN_DIR)" ]; then
+    mkdir -p -m=700 ${MOUNT_PATH}${SYS_CONN_DIR}
+    cp  ${SYS_CONN_DIR}/* \
+        ${MOUNT_PATH}${SYS_CONN_DIR}/.
 fi
 
 # Detect hybrid intel-nvidia setups
