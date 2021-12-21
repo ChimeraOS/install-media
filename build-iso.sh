@@ -55,7 +55,7 @@ ISO_FILE_NAME=`basename "${ISO_FILE_PATH}"`
 VERSION=`echo "${ISO_FILE_NAME}" | cut -c11-20 | sed 's/\./-/g'`
 ID=`git rev-parse --short HEAD`
 
-echo "::set-ouput name=iso_file_path::${ISO_FILE_PATH}"
-echo "::set-ouput name=iso_file_name::${ISO_FILE_NAME}"
-echo "::set-ouput name=version::${VERSION}"
-echo "::set-ouput name=id::${id}"
+echo "::set-output name=iso_file_path::${ISO_FILE_PATH}"
+echo "::set-output name=iso_file_name::${ISO_FILE_NAME}"
+echo "::set-output name=version::${VERSION}"
+echo "::set-output name=id::${ID}"
