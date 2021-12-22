@@ -27,6 +27,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.build_iso.outputs.iso_file_path }}
+          asset_path: ./output/${{ steps.build_iso.outputs.iso_file_name }}
           asset_name: ${{ steps.build_iso.outputs.iso_file_name }}
           asset_content_type: application/x-cd-image
