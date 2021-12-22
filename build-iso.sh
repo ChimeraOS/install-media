@@ -55,6 +55,11 @@ ISO_FILE_NAME=`basename "${ISO_FILE_PATH}"`
 VERSION=`echo "${ISO_FILE_NAME}" | cut -c11-20 | sed 's/\./-/g'`
 ID=`git rev-parse --short HEAD`
 
+pushd ${output_dir}
+sha256sum ${ISO_FILE_NAME} > sha256sum.txt
+cat sha256sum.txt
+popd
+
 echo "::set-output name=iso_file_name::${ISO_FILE_NAME}"
 echo "::set-output name=version::${VERSION}"
 echo "::set-output name=id::${ID}"
