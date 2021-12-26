@@ -8,8 +8,10 @@ fi
 
 #### Test conenction or ask the user for configuration ####
 while ! ( curl -LIs https://github.com | grep HTTP > /dev/null ); do
-    whiptail --yesno "No wired connection detected. Please connect this computer \
-     to the internet by configuring a new network." 10 50 \
+    whiptail \
+     "No internet connection detected.\n\nPlease use the network configuration tool to activate a network, then select \"Quit\" to exit the tool and continue the installation." \
+     12 50 \
+     --yesno \
      --yes-button "Configure" \
      --no-button "Exit"
 
