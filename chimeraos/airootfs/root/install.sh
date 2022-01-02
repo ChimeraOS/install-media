@@ -7,7 +7,7 @@ if [ $EUID -ne 0 ]; then
 fi
 
 #### Test conenction or ask the user for configuration ####
-while ! ( curl -LIs https://github.com | grep HTTP > /dev/null ); do
+while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
     whiptail \
      "No internet connection detected.\n\nPlease use the network configuration tool to activate a network, then select \"Quit\" to exit the tool and continue the installation." \
      12 50 \
