@@ -24,6 +24,7 @@ done
 #######################################
 
 if ! frzr-bootstrap gamer; then
+    whiptail --msgbox "System bootstrap step failed." 10 50
     exit 1
 fi
 
@@ -78,11 +79,18 @@ EndSection" > ${MOUNT_PATH}/etc/X11/xorg.conf.d/10-nvidia-prime.conf
 fi
 
 export SHOW_UI=1
-if ! frzr-deploy chimeraos/chimeraos:stable; then
-    echo "Installation failed."
-    exit 1
+frzr-deploy chimeraos/chimeraos:stable
+RESULT=$?
+
+MSG="Installation failed."
+if [ "${RESULT}" == "0" ]; then
+    MSG="Installation successfully completed."
+elif [ "${RESULT}" == "29" ]; then
+    MSG="GitHub API rate limit error encountered. Please retry installation later."
 fi
 
-if (whiptail --yesno "Installation complete. Would you like to restart now?" 10 50); then
+if (whiptail --yesno "${MSG}\n\nWould you like to restart the computer?" 10 50); then
     reboot
 fi
+
+exit ${RESULT}
