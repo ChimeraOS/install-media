@@ -24,7 +24,10 @@ mkdir -p "${temp_dir}"
 AUR_PACKAGES="\
     frzr \
     rtl88x2bu-dkms-git \
+    rtw89-dkms-git \
     r8152-dkms \
+    rtl8812au-dkms-git \
+    rtl8814au-dkms-git \
 "
 
 # create repo directory if it doesn't exist yet
