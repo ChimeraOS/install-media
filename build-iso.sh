@@ -41,7 +41,9 @@ if [ -n "${BUILD_USER}" ]; then
 fi
 
 # build packages to the repo
+pushd /home/${BUILD_USER}
 "${PIKAUR_RUN[@]}"
+popd
 
 # copy all built packages to the repo
 cp /tmp/temp_repo/* ${LOCAL_REPO}
