@@ -14,7 +14,7 @@ RUN su - build -c "git clone https://aur.archlinux.org/pikaur.git /tmp/pikaur" &
     pacman --noconfirm -U /tmp/pikaur/pikaur-*.pkg.tar.zst
 
 # Add a fake systemd-run script to workaround pikaur requirement.
-RUN echo -e "#!/bin/bash\nif [[ \"$1\" == \"--version\" ]]; then echo 'fake 244 version'; fi\nmkdir -p /var/cache/pikaur\n" >> /usr/bin/systemd-run && \
+RUN echo -e "#!/bin/bash\nif [[ \"$1\" == \"--version\" ]]; then echo 'fake 244 version'; fi\nmkdir -p /var/cache/pikaur\n" > /usr/bin/systemd-run && \
     chmod +x /usr/bin/systemd-run
 
 #set working dir, you'll have to mount something yourself here
