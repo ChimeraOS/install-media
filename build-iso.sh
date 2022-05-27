@@ -55,6 +55,9 @@ sed "s|LOCAL_REPO|$LOCAL_REPO|g" $script_dir/pacman.conf.template > $script_dir/
 # make the container build the iso
 mkarchiso -v -w "${temp_dir}" -o "${output_dir}" "${script_dir}"
 
+# allow git command to work
+git config --global --add safe.directory "${workd_dir}"
+
 ISO_FILE_PATH=`ls ${output_dir}/*.iso`
 ISO_FILE_NAME=`basename "${ISO_FILE_PATH}"`
 VERSION=`echo "${ISO_FILE_NAME}" | cut -c11-20 | sed 's/\./-/g'`
