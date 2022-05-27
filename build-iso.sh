@@ -56,7 +56,7 @@ sed "s|LOCAL_REPO|$LOCAL_REPO|g" $script_dir/pacman.conf.template > $script_dir/
 mkarchiso -v -w "${temp_dir}" -o "${output_dir}" "${script_dir}"
 
 # allow git command to work
-git config --global --add safe.directory "${workd_dir}"
+git config --global --add safe.directory "${work_dir}"
 
 ISO_FILE_PATH=`ls ${output_dir}/*.iso`
 ISO_FILE_NAME=`basename "${ISO_FILE_PATH}"`
