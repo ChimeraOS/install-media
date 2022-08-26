@@ -28,6 +28,7 @@ AUR_PACKAGES="\
     r8152-dkms \
     rtl8812au-dkms-git \
     rtl8814au-dkms-git \
+    rz608-fix-git \
 "
 
 # create repo directory if it doesn't exist yet
