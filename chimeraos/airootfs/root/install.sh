@@ -6,6 +6,8 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
+dmesg --console-level 1
+
 #### Test conenction or ask the user for configuration ####
 while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
     whiptail \
