@@ -11,8 +11,6 @@ diffutils
 dosfstools
 efibootmgr
 intel-ucode
-ipw2100-fw
-ipw2200-fw
 jq
 libnewt
 linux
