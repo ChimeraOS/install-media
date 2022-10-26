@@ -6,7 +6,7 @@ MAINTAINER Wouter Wijsman
 
 #Install archiso
 RUN yes | pacman -Syuu archiso lynx
-RUN pacman --noconfirm -S --needed git pyalpm python-commonmark
+RUN pacman --noconfirm -S --needed git pyalpm python-commonmark python-markdown-it-py
 RUN echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     useradd build -G wheel -m
 RUN su - build -c "git clone https://aur.archlinux.org/pikaur.git /tmp/pikaur" && \
