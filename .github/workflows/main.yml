@@ -6,7 +6,11 @@ on:
 jobs:
   build:
     name: Installer ISO build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    outputs:
+      iso_file_name: ${{ steps.build_iso.outputs.iso_file_name }}
+      version: ${{ steps.build_iso.outputs.version }}
+      id: ${{ steps.build_iso.outputs.id }}
     steps:
       - uses: actions/checkout@v3
       - name: Change directory
