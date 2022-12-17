@@ -1,6 +1,5 @@
 #! /bin/bash
 
-
 if [ $EUID -ne 0 ]; then
     echo "$(basename $0) must be run as root"
     exit 1
@@ -9,6 +8,10 @@ fi
 dmesg --console-level 1
 
 #### Test conenction or ask the user for configuration ####
+
+# Waiting a bit because some wifi chips are slow to scan 5GHZ networks
+sleep 2
+
 while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
     whiptail \
      "No internet connection detected.\n\nPlease use the network configuration tool to activate a network, then select \"Quit\" to exit the tool and continue the installation." \
@@ -41,8 +44,23 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
 fi
 
 export SHOW_UI=1
-frzr-deploy chimeraos/chimeraos:stable
+
+if ( ls -1 /dev/disk/by-label | grep -q CHIMERA_UPDATE ); then
+
+CHOICE=$(whiptail --menu "How would you like to install ChimeraOS?" 18 50 10 \
+  "local" "Use local media for installation." \
+  "Online" "Fetch the latest stable image." \
+   3>&1 1>&2 2>&3)
+fi
+
+if [ ${CHOICE} == local ]; then
+export local_install=true
+   frzr-deploy
 RESULT=$?
+else
+   frzr-deploy chimeraos/chimeraos:stable
+RESULT=$?
+fi
 
 MSG="Installation failed."
 if [ "${RESULT}" == "0" ]; then
