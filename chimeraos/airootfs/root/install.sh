@@ -54,12 +54,12 @@ CHOICE=$(whiptail --menu "How would you like to install ChimeraOS?" 18 50 10 \
 fi
 
 if [ ${CHOICE} == local ]; then
-export local_install=true
-   frzr-deploy
-RESULT=$?
+    export local_install=true
+    frzr-deploy
+    RESULT=$?
 else
-   frzr-deploy chimeraos/chimeraos:stable
-RESULT=$?
+    frzr-deploy chimeraos/chimeraos:stable
+    RESULT=$?
 fi
 
 MSG="Installation failed."
