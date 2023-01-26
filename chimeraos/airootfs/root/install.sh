@@ -53,7 +53,7 @@ CHOICE=$(whiptail --menu "How would you like to install ChimeraOS?" 18 50 10 \
    3>&1 1>&2 2>&3)
 fi
 
-if [ ${CHOICE} == local ]; then
+if [ "${CHOICE}" == local ]; then
     export local_install=true
     frzr-deploy
     RESULT=$?
