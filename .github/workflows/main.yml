@@ -7,6 +7,8 @@ jobs:
   build:
     name: Installer ISO build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       iso_file_name: ${{ steps.build_iso.outputs.iso_file_name }}
       version: ${{ steps.build_iso.outputs.version }}
