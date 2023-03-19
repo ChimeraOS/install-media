@@ -7,6 +7,16 @@ fi
 
 dmesg --console-level 1
 
+if [ ! -d /sys/firmware/efi/efivars ]; then
+    MSG="Legacy BIOS installs are not supported. You must boot the installer in UEFI mode.\n\nWould you like to restart the computer now?"
+    if (whiptail --yesno "${MSG}" 10 50); then
+        reboot
+    fi
+
+    exit 1
+fi
+
+
 #### Test conenction or ask the user for configuration ####
 
 # Waiting a bit because some wifi chips are slow to scan 5GHZ networks
@@ -49,7 +59,7 @@ if ( ls -1 /dev/disk/by-label | grep -q CHIMERA_UPDATE ); then
 
 CHOICE=$(whiptail --menu "How would you like to install ChimeraOS?" 18 50 10 \
   "local" "Use local media for installation." \
-  "Online" "Fetch the latest stable image." \
+  "online" "Fetch the latest stable image." \
    3>&1 1>&2 2>&3)
 fi
 
@@ -69,7 +79,7 @@ elif [ "${RESULT}" == "29" ]; then
     MSG="GitHub API rate limit error encountered. Please retry installation later."
 fi
 
-if (whiptail --yesno "${MSG}\n\nWould you like to restart the computer?" 10 50); then
+if (whiptail --yesno "${MSG}\n\nWould you like to restart the computer now?" 10 50); then
     reboot
 fi
 
