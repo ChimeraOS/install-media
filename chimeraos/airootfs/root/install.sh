@@ -55,7 +55,7 @@ fi
 
 export SHOW_UI=1
 
-if ( ls -1 /dev/disk/by-label | grep -q CHIMERA_UPDATE ); then
+if ( ls -1 /dev/disk/by-label | grep -q FRZR_UPDATE ); then
 
 CHOICE=$(whiptail --menu "How would you like to install ChimeraOS?" 18 50 10 \
   "local" "Use local media for installation." \
