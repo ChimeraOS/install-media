@@ -1,11 +1,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+acpica
 amd-ucode
 b43-fwcutter
 base
 broadcom-wl
 btrfs-progs
+cpio
 dhcpcd
 diffutils
 dosfstools
