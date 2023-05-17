@@ -12,6 +12,7 @@ dhcpcd
 diffutils
 dosfstools
 efibootmgr
+git
 intel-ucode
 jq
 libnewt
