@@ -38,11 +38,6 @@ while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
 done
 #######################################
 
-if ! frzr-bootstrap gamer; then
-    whiptail --msgbox "System bootstrap step failed." 10 50
-    exit 1
-fi
-
 #### Post install steps for system configuration
 # Copy over all network configuration from the live session to the system
 MOUNT_PATH=/tmp/frzr_root
@@ -51,6 +46,48 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
     mkdir -p -m=700 ${MOUNT_PATH}${SYS_CONN_DIR}
     cp  ${SYS_CONN_DIR}/* \
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
+fi
+
+MENU_CHOICE=$(whiptail --title "ChimeraOS Installer" --menu "Choose an option:" 12 50 2 \
+    "1" "Install ChimeraOS" \
+    "2" "Advanced Options" \
+    3>&1 1>&2 2>&3)
+
+case $MENU_CHOICE in
+    1)
+        # User selected "Install ChimeraOS"
+        ;;
+    2)
+        # User selected "Advanced Options"
+        ADV_OPTIONS=(
+            "1" "Use Firmware Overrides" OFF
+            "2" "Use Swap" OFF
+        )
+
+        SELECTED_OPTIONS=$(whiptail --title "Advanced Options" --checklist "Choose options to configure:" 12 50 2 "${ADV_OPTIONS[@]}" 3>&1 1>&2 2>&3)
+
+        for OPTION in $SELECTED_OPTIONS; do
+            case $OPTION in
+                1)
+                    whiptail --title "Advanced Options" --msgbox "Use Firmware Overrides selected." 8 40
+                    DEVICE_QUIRKS_CONF="/etc/device-quirks/device-quirks.conf"
+                    echo "export USE_FIRMWARE_OVERRIDES=1" > ${MOUNT_PATH}${DEVICE_QUIRKS_CONF}
+                    ;;
+                2)
+                    whiptail --title "Advanced Options" --msgbox "Use Swap selected." 8 40
+                    export USE_SWAP=1
+                    ;;
+            esac
+        done
+        ;;
+    *)
+        ;;
+esac
+
+
+if ! frzr-bootstrap gamer; then
+    whiptail --msgbox "System bootstrap step failed." 10 50
+    exit 1
 fi
 
 export SHOW_UI=1
