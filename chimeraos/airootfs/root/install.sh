@@ -48,46 +48,40 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
 fi
 
-MENU_CHOICE=$(whiptail --title "ChimeraOS Installer" --menu "Choose an option:" 12 50 2 \
-    "1" "Install ChimeraOS" \
-    "2" "Advanced Options" \
-    3>&1 1>&2 2>&3)
-
-case $MENU_CHOICE in
-    1)
-        # User selected "Install ChimeraOS"
-        ;;
-    2)
-        # User selected "Advanced Options"
-        ADV_OPTIONS=(
-            "1" "Use Firmware Overrides" OFF
-            "2" "Use Swap" OFF
-        )
-
-        SELECTED_OPTIONS=$(whiptail --title "Advanced Options" --checklist "Choose options to configure:" 12 50 2 "${ADV_OPTIONS[@]}" 3>&1 1>&2 2>&3)
-
-        for OPTION in $SELECTED_OPTIONS; do
-            case $OPTION in
-                1)
-                    whiptail --title "Advanced Options" --msgbox "Use Firmware Overrides selected." 8 40
-                    DEVICE_QUIRKS_CONF="/etc/device-quirks/device-quirks.conf"
-                    echo "export USE_FIRMWARE_OVERRIDES=1" > ${MOUNT_PATH}${DEVICE_QUIRKS_CONF}
-                    ;;
-                2)
-                    whiptail --title "Advanced Options" --msgbox "Use Swap selected." 8 40
-                    export USE_SWAP=1
-                    ;;
-            esac
-        done
-        ;;
-    *)
-        ;;
-esac
-
-
 if ! frzr-bootstrap gamer; then
     whiptail --msgbox "System bootstrap step failed." 10 50
     exit 1
+fi
+
+MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
+  "Standard Install" "Install ChimeraOS with default options." \
+  "Advanced Install" "Install ChimeraOS with advanced options." \
+   3>&1 1>&2 2>&3)
+
+if [ "$MENU_SELECT" = "Advanced Install" ]; then
+    whiptail --title "Advanced Options" --checklist \
+    "Select options:" 10 55 4 \
+    "Use Firmware Overrides" "DSDT/EDID" OFF \
+    "Use Swap" "Not Implemented" OFF \
+    2> checklist_output.txt
+
+    # Read the selected options from the output file
+    selected_options=$(cat checklist_output.txt)
+    # Process the selected options
+    for option in $selected_options; do
+        case $option in
+            "Use Firmware Overrides")
+                DEVICE_QUIRKS_CONF="/etc/device-quirks/device-quirks.conf"
+		echo "export USE_FIRMWARE_OVERRIDES=1" > ${MOUNT_PATH}${DEVICE_QUIRKS_CONF}
+                ;;
+            "Use Swap")
+                export USE_SWAP=1
+                ;;
+        esac
+    done
+
+    # Clean up the output file
+    rm checklist_output.txt
 fi
 
 export SHOW_UI=1
