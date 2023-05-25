@@ -62,7 +62,6 @@ if [ "$MENU_SELECT" = "Advanced Install" ]; then
     whiptail --title "Advanced Options" --checklist \
     "Select options:" 10 55 4 \
     "Use Firmware Overrides" "DSDT/EDID" OFF \
-    "Use Swap" "Not Implemented" OFF \
     2> checklist_output.txt
 
     # Read the selected options from the output file
@@ -73,9 +72,6 @@ if [ "$MENU_SELECT" = "Advanced Install" ]; then
             "Use Firmware Overrides")
                 DEVICE_QUIRKS_CONF="/etc/device-quirks/device-quirks.conf"
 		echo "export USE_FIRMWARE_OVERRIDES=1" > ${MOUNT_PATH}${DEVICE_QUIRKS_CONF}
-                ;;
-            "Use Swap")
-                export USE_SWAP=1
                 ;;
         esac
     done
