@@ -59,25 +59,19 @@ MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
    3>&1 1>&2 2>&3)
 
 if [ "$MENU_SELECT" = "Advanced Install" ]; then
-    whiptail --title "Advanced Options" --checklist \
-    "Select options:" 10 55 4 \
-    "Use Firmware Overrides" "DSDT/EDID" OFF \
-    2> checklist_output.txt
+OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
+  "Use Firmware Overrides" "DSDT/EDID" OFF 3>&1 1>&2 2>&3)
 
-    # Read the selected options from the output file
-    selected_options=$(cat checklist_output.txt)
-    # Process the selected options
-    for option in $selected_options; do
-        case $option in
-            "Use Firmware Overrides")
-                DEVICE_QUIRKS_CONF="/etc/device-quirks/device-quirks.conf"
-		echo "export USE_FIRMWARE_OVERRIDES=1" > ${MOUNT_PATH}${DEVICE_QUIRKS_CONF}
-                ;;
-        esac
-    done
-
-    # Clean up the output file
-    rm checklist_output.txt
+    if [[ $OPTIONS == "Use Firmware Overrides" ]]; then
+       echo "Enabling firmware overrides..."
+       if [[ ! -d /tmp/frzr_root/etc/device-quirks/ ]]; then
+          mkdir -p /tmp/frzr_root/etc/device-quirks
+          echo -n '
+export USE_FIRMWARE_OVERRIDES=1
+export USB_WAKE_ENABLED=1
+' >> /tmp/frzr_root/etc/device-quirks/device-quirks.conf
+	fi
+    fi
 fi
 
 export SHOW_UI=1
