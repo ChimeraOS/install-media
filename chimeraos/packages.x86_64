@@ -5,7 +5,7 @@ acpica
 amd-ucode
 b43-fwcutter
 base
-broadcom-wl
+broadcom-wl-dkms
 btrfs-progs
 cpio
 dhcpcd
@@ -17,7 +17,8 @@ intel-ucode
 jq
 libnewt
 linux-chimeraos
-linux-firmware-git
+linux-chimeraos-headers
+linux-firmware
 mkinitcpio
 mkinitcpio-archiso
 nano
