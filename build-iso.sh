@@ -31,6 +31,11 @@ AUR_PACKAGES="\
     rz608-fix-git \
 "
 
+ADDITIONAL_PACKAGES="\
+    https://github.com/ChimeraOS/linux-chimeraos/releases/download/v6.3.9-chos2/linux-chimeraos-6.3.9.chos2-1-x86_64.pkg.tar.zst \
+    https://builds.garudalinux.org/repos/chaotic-aur/x86_64/linux-firmware-git-20230620.045b213-1-any.pkg.tar.zst \
+"
+
 # create repo directory if it doesn't exist yet
 LOCAL_REPO="${script_dir}/extra_pkg"
 mkdir -p ${LOCAL_REPO}
@@ -48,6 +53,9 @@ popd
 
 # copy all built packages to the repo
 cp /tmp/temp_repo/* ${LOCAL_REPO}
+
+# download additional packages to the repo
+wget --directory-prefix=${LOCAL_REPO} ${ADDITIONAL_PACKAGES}
 
 # Add the repo to the build
 repo-add ${LOCAL_REPO}/chimeraos.db.tar.gz ${LOCAL_REPO}/*.pkg.*
