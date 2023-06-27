@@ -55,7 +55,7 @@ popd
 cp /tmp/temp_repo/* ${LOCAL_REPO}
 
 # download additional packages to the repo
-wget --directory-prefix=${LOCAL_REPO} ${ADDITIONAL_PACKAGES}
+curl -L --remote-name-all --output-dir ${LOCAL_REPO} ${ADDITIONAL_PACKAGES}
 
 # Add the repo to the build
 repo-add ${LOCAL_REPO}/chimeraos.db.tar.gz ${LOCAL_REPO}/*.pkg.*
