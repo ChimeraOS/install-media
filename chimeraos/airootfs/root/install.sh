@@ -70,7 +70,7 @@ OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
           cat > /tmp/frzr_root/etc/device-quirks/device-quirks.conf << EOL
 export USE_FIRMWARE_OVERRIDES=1
 export USB_WAKE_ENABLED=1
-EOF
+EOL
           # Create dsdt_override.log with default values
           cat > /tmp/frzr_root/etc/device-quirks/dsdt_override.log << EOL
 LAST_DSDT=None
