@@ -22,6 +22,7 @@ fi
 # Waiting a bit because some wifi chips are slow to scan 5GHZ networks
 sleep 2
 
+TARGET="stable"
 while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
     whiptail \
      "No internet connection detected.\n\nPlease use the network configuration tool to activate a network, then select \"Quit\" to exit the tool and continue the installation." \
@@ -59,29 +60,35 @@ MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
    3>&1 1>&2 2>&3)
 
 if [ "$MENU_SELECT" = "Advanced Install" ]; then
-OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
-  "Use Firmware Overrides" "DSDT/EDID" OFF 3>&1 1>&2 2>&3)
+  OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
+    "Use Firmware Overrides" "DSDT/EDID" OFF \
+    "Unstable Builds" "" ON 3>&1 1>&2 2>&3)
 
-    if [[ $OPTIONS == "Use Firmware Overrides" ]]; then
-       echo "Enabling firmware overrides..."
-       if [[ ! -d /tmp/frzr_root/etc/device-quirks/ ]]; then
-          mkdir -p /tmp/frzr_root/etc/device-quirks
-	  # Create device-quirks default config
-          cat > /tmp/frzr_root/etc/device-quirks/device-quirks.conf << EOL
+  if echo "$OPTIONS" | grep -q "Use Firmware Overrides"; then
+    echo "Enabling firmware overrides..."
+    if [[ ! -d "/tmp/frzr_root/etc/device-quirks/" ]]; then
+      mkdir -p "/tmp/frzr_root/etc/device-quirks"
+      # Create device-quirks default config
+      cat >"/tmp/frzr_root/etc/device-quirks/device-quirks.conf" <<EOL
 export USE_FIRMWARE_OVERRIDES=1
 export USB_WAKE_ENABLED=1
 EOL
-          # Create dsdt_override.log with default values
-          cat > /tmp/frzr_root/etc/device-quirks/dsdt_override.log << EOL
+      # Create dsdt_override.log with default values
+      cat >"/tmp/frzr_root/etc/device-quirks/dsdt_override.log" <<EOL
 LAST_DSDT=None
 LAST_BIOS_DATE=None
 LAST_BIOS_RELEASE=None
 LAST_BIOS_VENDOR=None
 LAST_BIOS_VERSION=None
 EOL
-	fi
     fi
+  fi
+
+  if echo "$OPTIONS" | grep -q "Unstable Builds"; then
+    TARGET="unstable"
+  fi
 fi
+
 
 export SHOW_UI=1
 
@@ -98,7 +105,7 @@ if [ "${CHOICE}" == "local" ]; then
     frzr-deploy
     RESULT=$?
 else
-    frzr-deploy chimeraos/chimeraos:stable
+    frzr-deploy chimeraos/chimeraos:${TARGET}
     RESULT=$?
 fi
 
