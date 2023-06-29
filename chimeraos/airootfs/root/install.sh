@@ -66,10 +66,19 @@ OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
        echo "Enabling firmware overrides..."
        if [[ ! -d /tmp/frzr_root/etc/device-quirks/ ]]; then
           mkdir -p /tmp/frzr_root/etc/device-quirks
-          echo -n '
+	  # Create device-quirks default config
+          cat > /tmp/frzr_root/etc/device-quirks/device-quirks.conf << EOL
 export USE_FIRMWARE_OVERRIDES=1
 export USB_WAKE_ENABLED=1
-' >> /tmp/frzr_root/etc/device-quirks/device-quirks.conf
+EOF
+          # Create dsdt_override.log with default values
+          cat > /tmp/frzr_root/etc/device-quirks/dsdt_override.log << EOL
+LAST_DSDT=None
+LAST_BIOS_DATE=None
+LAST_BIOS_RELEASE=None
+LAST_BIOS_VENDOR=None
+LAST_BIOS_VERSION=None
+EOL
 	fi
     fi
 fi
