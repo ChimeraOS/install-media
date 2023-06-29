@@ -39,19 +39,20 @@ while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
 done
 #######################################
 
+MOUNT_PATH=/tmp/frzr_root
+
+if ! frzr-bootstrap gamer; then
+    whiptail --msgbox "System bootstrap step failed." 10 50
+    exit 1
+fi
+
 #### Post install steps for system configuration
 # Copy over all network configuration from the live session to the system
-MOUNT_PATH=/tmp/frzr_root
 SYS_CONN_DIR="/etc/NetworkManager/system-connections"
 if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
     mkdir -p -m=700 ${MOUNT_PATH}${SYS_CONN_DIR}
     cp  ${SYS_CONN_DIR}/* \
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
-fi
-
-if ! frzr-bootstrap gamer; then
-    whiptail --msgbox "System bootstrap step failed." 10 50
-    exit 1
 fi
 
 MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
