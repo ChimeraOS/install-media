@@ -55,6 +55,21 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
 fi
 
+# Grab the steam bootstrap for first boot
+
+URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.76-1-x86_64.pkg.tar.zst"
+TMP_PKG="/tmp/package.pkg.tar.zst"
+TMP_FILE="/tmp/bootstraplinux_ubuntu12_32.tar.xz"
+DESTINATION="/tmp/frzr_root/etc/first-boot/"
+if [[ ! -d "$DESTINATION" ]]; then
+      mkdir -p /tmp/frzr_root/etc/first-boot
+fi
+
+curl -o "$TMP_PKG" "$URL"
+tar -I zstd -xvf "$TMP_PKG" usr/lib/steam/bootstraplinux_ubuntu12_32.tar.xz -O > "$TMP_FILE"
+mv "$TMP_FILE" "$DESTINATION"
+rm "$TMP_PKG"
+
 MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
   "Standard Install" "Install ChimeraOS with default options." \
   "Advanced Install" "Install ChimeraOS with advanced options." \
