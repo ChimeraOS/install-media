@@ -78,7 +78,7 @@ MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
 if [ "$MENU_SELECT" = "Advanced Install" ]; then
   OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
     "Use Firmware Overrides" "DSDT/EDID" OFF \
-    "Unstable Builds" "" ON 3>&1 1>&2 2>&3)
+    "Unstable Builds" "" OFF 3>&1 1>&2 2>&3)
 
   if echo "$OPTIONS" | grep -q "Use Firmware Overrides"; then
     echo "Enabling firmware overrides..."
