@@ -23,6 +23,8 @@ mkdir -p "${temp_dir}"
 # add AUR packages to the build
 AUR_PACKAGES="\
     frzr \
+    gamescope-plus \
+    gamescope-session-git \
     rtl88x2bu-dkms-git \
     rtw89-dkms-git \
     r8152-dkms \
