@@ -31,3 +31,16 @@ wget
 zsh
 frzr
 networkmanager
+libva-intel-driver
+libva-vdpau-driver
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+vulkan-icd-loader
+xf86-video-amdgpu
+mesa
+mesa-vdpau
+vulkan-intel
+vulkan-radeon
+vulkan-tools
