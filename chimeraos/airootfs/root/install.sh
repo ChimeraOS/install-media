@@ -1,5 +1,19 @@
 #! /bin/bash
 
+clean_progress() {
+        local scale=$1
+        local postfix=$2
+        local last_value=$scale
+        while IFS= read -r line; do
+                value=$(( ${line}*${scale}/100 ))
+                if [ "$last_value" != "$value" ]; then
+                        echo ${value}${postfix}
+                        last_value=$value
+                fi
+        done
+}
+
+
 if [ $EUID -ne 0 ]; then
     echo "$(basename $0) must be run as root"
     exit 1
@@ -17,13 +31,13 @@ if [ ! -d /sys/firmware/efi/efivars ]; then
 fi
 
 
-#### Test conenction or ask the user for configuration ####
+#### Test connection or ask the user for configuration ####
 
 # Waiting a bit because some wifi chips are slow to scan 5GHZ networks
 sleep 2
 
 TARGET="stable"
-while ! ( curl -Ls https://github.com | grep '<html' > /dev/null ); do
+while ! ( curl --http1.1 -Ls https://github.com | grep '<html' > /dev/null ); do
     whiptail \
      "No internet connection detected.\n\nPlease use the network configuration tool to activate a network, then select \"Quit\" to exit the tool and continue the installation." \
      12 50 \
@@ -57,7 +71,7 @@ fi
 
 # Grab the steam bootstrap for first boot
 
-URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.76-1-x86_64.pkg.tar.zst"
+URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.78-1.2-x86_64.pkg.tar.zst"
 TMP_PKG="/tmp/package.pkg.tar.zst"
 TMP_FILE="/tmp/bootstraplinux_ubuntu12_32.tar.xz"
 DESTINATION="/tmp/frzr_root/etc/first-boot/"
@@ -65,17 +79,20 @@ if [[ ! -d "$DESTINATION" ]]; then
       mkdir -p /tmp/frzr_root/etc/first-boot
 fi
 
-curl -o "$TMP_PKG" "$URL"
+curl --http1.1 -# -L -o "${TMP_PKG}" -C - "${URL}" 2>&1 | \
+stdbuf -oL tr '\r' '\n' | grep --line-buffered -oP '[0-9]*+(?=.[0-9])' | clean_progress 100 | \
+whiptail --gauge "Downloading Steam" 10 50 0
+
 tar -I zstd -xvf "$TMP_PKG" usr/lib/steam/bootstraplinux_ubuntu12_32.tar.xz -O > "$TMP_FILE"
 mv "$TMP_FILE" "$DESTINATION"
 rm "$TMP_PKG"
 
-MENU_SELECT=$(whiptail --menu "Installer Options" 25 75 10 \
-  "Standard Install" "Install ChimeraOS with default options." \
-  "Advanced Install" "Install ChimeraOS with advanced options." \
+MENU_SELECT=$(whiptail --menu "Install Options" 25 75 10 \
+  "Standard:" "Install with default options" \
+  "Advanced:" "Install with advanced options" \
    3>&1 1>&2 2>&3)
 
-if [ "$MENU_SELECT" = "Advanced Install" ]; then
+if [ "$MENU_SELECT" = "Advanced:" ]; then
   OPTIONS=$(whiptail --separate-output --checklist "Choose options" 10 55 4 \
     "Use Firmware Overrides" "DSDT/EDID" OFF \
     "Unstable Builds" "" OFF 3>&1 1>&2 2>&3)
