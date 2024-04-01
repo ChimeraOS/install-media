@@ -37,8 +37,8 @@ timedatectl set-ntp true
 
 #### Test connection or ask the user for configuration ####
 
-# Waiting a bit because some wifi chips are slow to scan 5GHZ networks
-sleep 2
+# Waiting a bit because some wifi chips are slow to scan 5GHZ networks and to avoid kernel boot up messages printing over the screen
+sleep 10
 
 TARGET="stable"
 while ! ( curl --http1.1 -Ls https://github.com | grep '<html' > /dev/null ); do
