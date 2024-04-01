@@ -31,6 +31,10 @@ if [ ! -d /sys/firmware/efi/efivars ]; then
 fi
 
 
+# try to set correct date & time -- required to be able to connect to github via https if your hardware clock is set too far into the past
+timedatectl set-ntp true
+
+
 #### Test connection or ask the user for configuration ####
 
 # Waiting a bit because some wifi chips are slow to scan 5GHZ networks
