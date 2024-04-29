@@ -75,7 +75,7 @@ fi
 
 # Grab the steam bootstrap for first boot
 
-URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.78-1.2-x86_64.pkg.tar.zst"
+URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.79-1-x86_64.pkg.tar.zst"
 TMP_PKG="/tmp/package.pkg.tar.zst"
 TMP_FILE="/tmp/bootstraplinux_ubuntu12_32.tar.xz"
 DESTINATION="/tmp/frzr_root/etc/first-boot/"
