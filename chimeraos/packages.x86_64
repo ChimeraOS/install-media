@@ -13,6 +13,7 @@ diffutils
 dosfstools
 efibootmgr
 git
+inputplumber-bin
 intel-ucode
 jq
 libnewt
@@ -25,9 +26,8 @@ nano
 netctl
 openssh
 parted
-syslinux
+plymouth
 usbutils
 wget
 zsh
-frzr
 networkmanager

@@ -22,13 +22,13 @@ mkdir -p "${temp_dir}"
 
 # add AUR packages to the build
 AUR_PACKAGES="\
-    frzr \
     rtl88x2bu-dkms-git \
     rtw89-dkms-git \
     r8152-dkms \
     rtl8812au-dkms-git \
     rtl8814au-dkms-git \
     rz608-fix-git \
+    inputplumber-bin \
 "
 
 ADDITIONAL_PACKAGES="\
