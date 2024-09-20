@@ -203,9 +203,9 @@ timedatectl set-ntp true
 
 #### Test connection or ask the user for configuration ####
 
-# Waiting a bit because some wifi chips are slow to scan 5GHZ networks and to avoid kernel boot up messages printing over the screen
+# Waiting a bit because some wifi chips are slow to scan 5GHZ networks
 echo "Starting installer..."
-sleep 10
+sleep 2
 
 TARGET="stable"
 while ! ( curl --http1.1 -Ls https://github.com | grep '<html' > /dev/null ); do
