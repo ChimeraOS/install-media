@@ -88,8 +88,8 @@ get_disk_human_description() {
         local transport=$(lsblk --list -n -o name,tran | grep "$name " | cut -d' ' -f2- | \
                 sed -e 's/usb/USB/' | \
                 sed -e 's/nvme/Internal/' | \
-                sed -e 's/ata/Internal/' | \
                 sed -e 's/sata/Internal/' | \
+                sed -e 's/ata/Internal/' | \
                 sed -e 's/mmc/SD card/' | \
                 xargs echo -n)
         echo "[${transport}] ${vendor} ${model:=Unknown model} ($size)" | xargs echo -n
