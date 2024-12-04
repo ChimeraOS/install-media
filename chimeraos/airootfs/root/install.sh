@@ -237,8 +237,17 @@ Do you wish to proceed?" 15 70); then
         cancel_install
 fi
 
+export SHOW_UI=1
+export FRZR_INSTALLER=1
+export MOUNT_PATH="/tmp/frzr_root"
+export EFI_MOUNT_PATH="/tmp/frzr_root/efi"
+export SWAP_GIB=0
+export SYSTEMD_RELAX_ESP_CHECKS=1
+
 # perform bootstrap of disk
-if ! frzr-bootstrap gamer /dev/${DISK}; then
+frzr bootstrap gamer /dev/${DISK}
+RESULT=$?
+if [ "${RESULT}" != "0" ]; then
     whiptail --msgbox "System bootstrap step failed." 10 50
     cancel_install
 fi
@@ -252,8 +261,7 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
 fi
 
-export SHOW_UI=1
-frzr-deploy chimeraos/chimeraos:${TARGET}
+frzr deploy chimeraos/chimeraos:${TARGET}
 RESULT=$?
 
 MSG="Installation failed."

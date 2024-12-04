@@ -13,7 +13,7 @@ diffutils
 dosfstools
 efibootmgr
 git
-inputplumber-bin
+inputplumber
 intel-ucode
 jq
 libnewt
@@ -31,3 +31,4 @@ usbutils
 wget
 zsh
 networkmanager
+frzr-git
