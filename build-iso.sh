@@ -33,8 +33,8 @@ AUR_PACKAGES="\
 "
 
 ADDITIONAL_PACKAGES="\
-    https://github.com/ChimeraOS/linux-chimeraos/releases/download/v6.10.3-chos1-1/linux-chimeraos-6.10.3.chos1-1-x86_64.pkg.tar.zst \
-    https://github.com/ChimeraOS/linux-chimeraos/releases/download/v6.10.3-chos1-1/linux-chimeraos-headers-6.10.3.chos1-1-x86_64.pkg.tar.zst \
+    https://github.com/ChimeraOS/linux-chimeraos/releases/download/v6.12.9-chos1-1/linux-chimeraos-6.12.9.chos1-1-x86_64.pkg.tar.zst \
+    https://github.com/ChimeraOS/linux-chimeraos/releases/download/v6.12.9-chos1-1/linux-chimeraos-headers-6.12.9.chos1-1-x86_64.pkg.tar.zst \
 "
 
 # create repo directory if it doesn't exist yet
