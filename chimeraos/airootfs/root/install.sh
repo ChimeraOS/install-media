@@ -252,6 +252,25 @@ if [ -d ${SYS_CONN_DIR} ] && [ -n "$(ls -A ${SYS_CONN_DIR})" ]; then
         ${MOUNT_PATH}${SYS_CONN_DIR}/.
 fi
 
+
+# Grab the steam bootstrap for first boot
+URL="https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/steam-jupiter-stable-1.0.0.79-1.5-x86_64.pkg.tar.zst"
+TMP_PKG="/tmp/package.pkg.tar.zst"
+TMP_FILE="/tmp/bootstraplinux_ubuntu12_32.tar.xz"
+DESTINATION="/tmp/frzr_root/etc/first-boot/"
+if [[ ! -d "$DESTINATION" ]]; then
+      mkdir -p /tmp/frzr_root/etc/first-boot
+fi
+
+curl --http1.1 -# -L -o "${TMP_PKG}" -C - "${URL}" 2>&1 | \
+stdbuf -oL tr '\r' '\n' | grep --line-buffered -oP '[0-9]*+(?=.[0-9])' | clean_progress 100 | \
+whiptail --gauge "Downloading Steam" 10 50 0
+
+tar -I zstd -xvf "$TMP_PKG" usr/lib/steam/bootstraplinux_ubuntu12_32.tar.xz -O > "$TMP_FILE"
+mv "$TMP_FILE" "$DESTINATION"
+rm "$TMP_PKG"
+
+
 export SHOW_UI=1
 frzr-deploy chimeraos/chimeraos:${TARGET}
 RESULT=$?
